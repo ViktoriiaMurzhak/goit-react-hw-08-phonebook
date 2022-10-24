@@ -31,7 +31,7 @@ export class ContactForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form className={css.form}>
+      <form className={css.form} onSubmit={this.handleSubmit}>
         <label title="Name" htmlFor="name" className={css.label}>
           Name
         </label>
@@ -58,7 +58,7 @@ export class ContactForm extends Component {
           value={number}
           required
         />
-        <button className={css.add} onClick={this.handleSubmit} type="submit">
+        <button className={css.add} type="submit">
           Add contact
         </button>
       </form>

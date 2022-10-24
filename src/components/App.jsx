@@ -4,15 +4,13 @@ import { ContactList } from './ContactList';
 import { Filter } from './Filter';
 import { nanoid } from 'nanoid';
 import css from './App.module.css';
+import contacts from '../data/contacts.json';
+
+const CONTACTS_LIST_LOCAL_KEY = 'contacts-list';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Владислав Чорний', number: '459-12-56' },
-      { id: 'id-2', name: 'Олександр Репета', number: '443-89-12' },
-      { id: 'id-3', name: 'Володимир Зеленський', number: '645-17-79' },
-      { id: 'id-4', name: 'Степан Бандера', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -31,6 +29,23 @@ export class App extends Component {
           ],
         }));
   };
+
+  componentDidMount() {
+    const localContactsList = localStorage.getItem(CONTACTS_LIST_LOCAL_KEY);
+    if (localContactsList) {
+      this.setState({ contacts: JSON.parse(localContactsList) });
+    } else {
+      this.setState({ contacts: contacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem(CONTACTS_LIST_LOCAL_KEY, JSON.stringify(contacts));
+    }
+  }
 
   handleDeleteContact = id => {
     this.setState(({ contacts }) => ({

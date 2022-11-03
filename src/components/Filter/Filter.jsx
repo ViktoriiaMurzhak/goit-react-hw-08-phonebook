@@ -1,7 +1,21 @@
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterContactsAction } from 'redux/store';
 import css from './Filter.module.css';
 
-export const Filter = ({ filter, handleFilter }) => {
+export const Filter = () => {
+  const { filter, contacts } = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  const handleFilter = e => {
+    dispatch(filterContactsAction(e.target.value));
+  };
+
+  const filteredContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   return (
     <label className={css.label}>
       Find contacts by name
@@ -14,9 +28,4 @@ export const Filter = ({ filter, handleFilter }) => {
       />
     </label>
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  handleFilter: PropTypes.func.isRequired,
 };

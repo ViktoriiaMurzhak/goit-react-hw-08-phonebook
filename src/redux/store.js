@@ -37,6 +37,7 @@ function contactsReducer(state = initialState, action) {
       console.log('action', action);
       console.log(state.filter);
       return {
+        ...state,
         filter: action.payload,
         contacts: state.contacts.filter(contact =>
           contact.name.toLowerCase().includes(state.filter.toLowerCase())

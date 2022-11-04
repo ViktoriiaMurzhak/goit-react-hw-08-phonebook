@@ -1,28 +1,27 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContactsAction } from 'redux/store';
+// import { getFilteredContacts } from 'redux/selectors';
+import { addContactsAction } from '../../redux/contacts/slice.contacts';
 import css from './ContactForm.module.css';
 
 export const ContactForm = () => {
-  const { contacts } = useSelector(state => state);
+  const contacts = useSelector(state => state.items);
+
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleAddContact = (name, number) => {
-    return contacts.find(contact => contact.name === name)
+    return contacts?.find(contact => contact.name === name)
       ? alert(`${name} is already in contacts`)
       : dispatch(
-          addContactsAction([
-            ...contacts,
-            {
-              id: nanoid(),
-              name,
-              number,
-            },
-          ])
+          addContactsAction({
+            id: nanoid(),
+            name,
+            number,
+          })
         );
   };
 

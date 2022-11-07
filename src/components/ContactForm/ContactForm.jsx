@@ -11,16 +11,16 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const handleAddContact = (name, number) => {
+  const handleAddContact = (name, phone) => {
     return contacts?.find(contact => contact.name === name)
       ? alert(`${name} is already in contacts`)
       : dispatch(
           addContacts({
             id: nanoid(),
             name,
-            number,
+            phone,
           })
         );
   };
@@ -31,8 +31,8 @@ export const ContactForm = () => {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default: {
         return;
@@ -42,13 +42,13 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    handleAddContact(name, number);
+    handleAddContact(name, phone);
     onDelete();
   };
 
   const onDelete = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -66,17 +66,17 @@ export const ContactForm = () => {
         value={name}
         required
       />
-      <label htmlFor="number" className={css.label}>
+      <label htmlFor="phone" className={css.label}>
         Number
       </label>{' '}
       <input
         className={css.full}
         type="tel"
-        name="number"
+        name="phone"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         onChange={handleChange}
-        value={number}
+        value={phone}
         required
       />
       <button className={css.add} type="submit">

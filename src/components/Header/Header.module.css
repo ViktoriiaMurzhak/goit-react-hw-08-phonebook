@@ -1,0 +1,42 @@
+.header {
+  background: rgba(40, 46, 79, 0.2);
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navLink {
+  margin-bottom: 8px;
+  color: rgb(220, 231, 255);
+  font-size: 22px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.active {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgb(220, 231, 255);
+  border-bottom: 1px solid rgb(220, 231, 255);
+}
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.log {
+  text-align: end;
+}

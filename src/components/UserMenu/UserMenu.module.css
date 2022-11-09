@@ -1,0 +1,41 @@
+.box {
+  display: flex;
+  min-width: 300px;
+  justify-content: flex-end;
+}
+
+.miniBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  min-width: 50px;
+  max-width: 60px;
+  margin-right: 10px;
+}
+
+.name {
+  margin-bottom: 8px;
+  color: rgb(220, 231, 255);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.exit {
+  color: rgb(220, 231, 255);
+  background: #283657;
+  border: none;
+  width: 100px;
+  height: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 6px;
+  transition-property: background-color;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exit:hover {
+  background-color: #667db3;
+}

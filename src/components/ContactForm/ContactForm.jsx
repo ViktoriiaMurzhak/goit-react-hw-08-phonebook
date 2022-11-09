@@ -1,5 +1,5 @@
 import { getContacts } from '../../redux/selectors';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/operations';
@@ -11,16 +11,15 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
-  const handleAddContact = (name, phone) => {
+  const handleAddContact = (name, number) => {
     return contacts?.find(contact => contact.name === name)
       ? alert(`${name} is already in contacts`)
       : dispatch(
           addContacts({
-            id: nanoid(),
             name,
-            phone,
+            number,
           })
         );
   };
@@ -31,8 +30,8 @@ export const ContactForm = () => {
       case 'name':
         setName(value);
         break;
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
       default: {
         return;
@@ -42,13 +41,13 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    handleAddContact(name, phone);
+    handleAddContact(name, number);
     onDelete();
   };
 
   const onDelete = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -66,17 +65,17 @@ export const ContactForm = () => {
         value={name}
         required
       />
-      <label htmlFor="phone" className={css.label}>
+      <label htmlFor="number" className={css.label}>
         Number
-      </label>{' '}
+      </label>
       <input
         className={css.full}
         type="tel"
-        name="phone"
+        name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         onChange={handleChange}
-        value={phone}
+        value={number}
         required
       />
       <button className={css.add} type="submit">

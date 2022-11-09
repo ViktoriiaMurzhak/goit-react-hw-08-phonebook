@@ -35,3 +35,7 @@ p {
   margin: 0;
   color: rgb(220, 231, 255);
 }
+
+a {
+  text-decoration: none;
+}

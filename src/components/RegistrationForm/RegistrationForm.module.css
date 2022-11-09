@@ -5,6 +5,7 @@
   align-items: flex-start;
   border: 1px solid rgb(220, 231, 255);
   margin-bottom: 20px;
+  width: 420px;
 }
 
 .label {
@@ -12,6 +13,14 @@
   color: rgb(220, 231, 255);
   font-size: 22px;
   font-weight: 500;
+}
+
+.text {
+  margin: 0 auto 18px auto;
+  color: rgb(220, 231, 255);
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
 }
 
 .full {
@@ -26,7 +35,7 @@
 }
 
 .add {
-  margin-bottom: 15px;
+  margin: 0 auto 15px auto;
   color: rgb(220, 231, 255);
   background: #283657;
   border: none;
@@ -42,4 +51,9 @@
 
 .add:hover {
   background-color: #667db3;
+}
+
+.box {
+  width: 450px;
+  margin: 0 auto;
 }

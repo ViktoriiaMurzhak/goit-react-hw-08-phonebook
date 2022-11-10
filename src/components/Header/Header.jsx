@@ -17,7 +17,7 @@ export const Header = () => {
           <nav className={css.nav}>
             <ul className={css.page}>
               <li>
-                <NavLink className={activeClassName} to="/">
+                <NavLink className={activeClassName} end to="/">
                   Home
                 </NavLink>
               </li>

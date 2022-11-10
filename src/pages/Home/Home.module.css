@@ -8,9 +8,11 @@
 }
 
 .support {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 400px;
-  text-align: center;
+  height: 80px;
   margin: 70px auto 0 auto;
   color: rgb(19, 38, 78);
   font-size: 32px;
@@ -23,7 +25,7 @@
     rgba(0, 44, 255, 1) 21%,
     rgba(231, 217, 46, 1) 72%
   );
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .support:hover,

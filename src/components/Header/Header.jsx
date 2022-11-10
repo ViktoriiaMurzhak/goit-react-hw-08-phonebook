@@ -1,9 +1,9 @@
 import UserMenu from 'components/UserMenu/UserMenu';
 import { NavLink } from 'react-router-dom';
 import { Box } from '../Box';
-import css from './Header.module.css';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/selectors';
+import css from './Header.module.css';
 
 export const Header = () => {
   const activeClassName = ({ isActive }) =>
@@ -21,11 +21,13 @@ export const Header = () => {
                   Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink className={activeClassName} to="/contacts">
-                  Contacts
-                </NavLink>
-              </li>
+              {isLoggedIn && (
+                <li>
+                  <NavLink className={activeClassName} to="/contacts">
+                    Contacts
+                  </NavLink>
+                </li>
+              )}
             </ul>
             {isLoggedIn ? (
               <UserMenu />

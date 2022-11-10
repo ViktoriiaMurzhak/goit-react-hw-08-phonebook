@@ -4,7 +4,6 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const getContacts = async () => {
   const { data } = await axios.get('/contacts');
-  console.log('data', data);
   return data;
 };
 
@@ -16,6 +15,5 @@ export const addContactsData = async contact => {
 
 export const deleteContactsData = async contactId => {
   const { data } = await axios.delete(`/contacts/${contactId}`);
-  console.log('data', data);
   return data;
 };

@@ -1,12 +1,14 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchCurrentUser } from 'redux/auth/auth-operations';
-import { getFetchingCurrentUser } from 'redux/selectors';
+import { getToken } from 'redux/selectors';
 
 import { Header } from './Header';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 const Home = lazy(() => import('../pages/Home'));
 const ContactsPage = lazy(() => import('../pages/Contacts'));
@@ -15,41 +17,46 @@ const Login = lazy(() => import('../pages/Login'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const token = useSelector(getToken);
+
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
-  const isFetchingCurrentUser = useSelector(getFetchingCurrentUser);
+    if (token) {
+      dispatch(fetchCurrentUser());
+    }
+    return;
+  }, [dispatch, token]);
 
   return (
     <>
-      {!isFetchingCurrentUser && (
-        <>
-          <Header />
-          <main>
-            <Suspense>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/contacts" element={<ContactsPage />} />
-                <Route path="/registration" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </>
-      )}
+      <Header />
+      <main>
+        <Suspense>
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/contacts" element={<ContactsPage />} />
+            </Route>
+
+            <Route path="/" element={<PublicRoute />}>
+              <Route path="/registration" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </main>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

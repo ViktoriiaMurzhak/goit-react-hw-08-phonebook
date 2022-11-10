@@ -29,7 +29,6 @@ const persistConfigContact = {
 const persistConfigFilter = {
   key: 'filter',
   storage,
-  blacklist: ['filter'],
 };
 
 const persistedAuth = persistReducer(persistConfigAuth, authReduser);

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/operations';
 
 import css from './ContactForm.module.css';
+import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -15,7 +16,7 @@ export const ContactForm = () => {
 
   const handleAddContact = (name, number) => {
     return contacts?.find(contact => contact.name === name)
-      ? alert(`${name} is already in contacts`)
+      ? toast.error(`${name} is already in contacts`)
       : dispatch(
           addContacts({
             name,

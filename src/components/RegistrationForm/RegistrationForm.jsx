@@ -36,7 +36,6 @@ export const RegistrationForm = () => {
         password,
       };
 
-      console.log(userInfo);
       dispatch(register(userInfo));
       setName('');
       setEmail('');
